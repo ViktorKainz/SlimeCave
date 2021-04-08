@@ -29,6 +29,6 @@ public class PlayerMovement : MonoBehaviour
         movement = new Vector2(moveHorizontal, moveVertical);
 
         player.velocity = movement * speed;
-        animator.SetFloat("Speed", Mathf.Abs(player.velocity.x + player.velocity.y));
+        animator.SetFloat("Speed", Mathf.Abs(Mathf.Abs(player.velocity.x) > Mathf.Abs(player.velocity.y) ? player.velocity.x : player.velocity.y));
     }   
 }
