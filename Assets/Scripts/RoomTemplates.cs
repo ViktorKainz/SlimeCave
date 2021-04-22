@@ -10,4 +10,5 @@ public class RoomTemplates : MonoBehaviour
     public GameObject[] west;
     public int roomsSpawned;
     public int maxRooms;
+    public int minRooms;
 }
