@@ -7,17 +7,6 @@ public class Rooms : MonoBehaviour
     public GameObject startRoom;
     public GameObject[] normalRooms;
     public GameObject[] specialRooms;
-    public GameObject[] bossRooms;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject[] cornerRooms;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
