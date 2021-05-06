@@ -9,13 +9,14 @@ public class PlayerMovement : MonoBehaviour
     private float moveVertical;
     public float speed;
     public Animator animator;
-    
-    
+
+
     public Rigidbody2D player;
+    public GameObject weapon;
     public Camera cam;
     private Vector2 movement;
     private Vector2 mousePos;
-
+    private bool rotating = true;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +37,12 @@ public class PlayerMovement : MonoBehaviour
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 lookDir = mousePos - player.position;
-        float angle =(float) (Math.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 0f);
-        player.rotation = angle;
-        Debug.Log(angle + " " + mousePos.ToString());
+        float angle =(float) (Math.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 2f);
+        weapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+        
+        
+        
+        
+        
     }   
 }
