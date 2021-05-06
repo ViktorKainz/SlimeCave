@@ -50,40 +50,40 @@ public class LevelGenerator : MonoBehaviour
             var y = Random.Range(0, levelSize - 1);
             var x = Random.Range(0, levelSize - 1);
             if (level[y, x] == null || level[y, x] == rooms.startRoom) continue;
-            if (level[y + 1, x] == null &&
+            if (y + 1 < levelSize && x + 1 < levelSize &&
+                level[y + 1, x] == null &&
                 level[y, x + 1] == null &&
-                level[y + 1, x + 1] == null &&
-                y + 1 < levelSize && x + 1 < levelSize)
+                level[y + 1, x + 1] == null)
             {
                 level[y, x] = rooms.cornerRooms[2];
                 level[y + 1, x] = rooms.cornerRooms[0];
                 level[y, x + 1] = rooms.cornerRooms[3];
                 level[y + 1, x + 1] = rooms.cornerRooms[1];
             }
-            else if (level[y + 1, x] == null &&
+            else if (y + 1 < levelSize && x > 0 &&
+                     level[y + 1, x] == null &&
                      level[y, x - 1] == null &&
-                     level[y + 1, x - 1] == null &&
-                     y + 1 < levelSize && x > 0)
+                     level[y + 1, x - 1] == null)
             {
                 level[y, x] = rooms.cornerRooms[3];
                 level[y + 1, x] = rooms.cornerRooms[1];
                 level[y, x - 1] = rooms.cornerRooms[2];
                 level[y + 1, x - 1] = rooms.cornerRooms[0];
             }
-            else if (level[y - 1, x] == null &&
+            else if (y > 0 && x + 1 < levelSize && 
+                     level[y - 1, x] == null &&
                      level[y, x + 1] == null &&
-                     level[y - 1, x + 1] == null &&
-                     y > 0 && x + 1 < levelSize)
+                     level[y - 1, x + 1] == null)
             {
                 level[y, x] = rooms.cornerRooms[0];
                 level[y - 1, x] = rooms.cornerRooms[2];
                 level[y, x + 1] = rooms.cornerRooms[1];
                 level[y - 1, x + 1] = rooms.cornerRooms[3];
             }
-            else if (level[y - 1, x] == null &&
+            else if (y > 0 && x > 0 &&
+                     level[y - 1, x] == null &&
                      level[y, x - 1] == null &&
-                     level[y - 1, x - 1] == null &&
-                     y > 0 && x > 0)
+                     level[y - 1, x - 1] == null)
             {
                 level[y, x] = rooms.cornerRooms[1];
                 level[y - 1, x] = rooms.cornerRooms[3];
@@ -100,6 +100,10 @@ public class LevelGenerator : MonoBehaviour
             {
                 if (level[y, x] != null)
                 {
+                    if (level[y, x] == rooms.startRoom)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(x * 10, y * 10, -1);
+                    }
                     level[y, x] = Instantiate(level[y, x], new Vector3(x * 10, y * 10), level[y, x].transform.rotation);
                     Tilemap map = level[y, x].transform.GetChild(1).gameObject.GetComponent<Tilemap>();
                     if (y > 0 && level[y - 1, x] != null)

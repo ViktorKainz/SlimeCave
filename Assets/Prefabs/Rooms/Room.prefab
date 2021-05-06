@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8773634849138124440}
   - component: {fileID: 8773634849138124443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 8773634850414430133}
   - component: {fileID: 8773634850414430132}
   - component: {fileID: 8773634850414430138}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tilemap Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 8773634850654703293}
   - component: {fileID: 8773634850654703267}
   - component: {fileID: 8773634850654703266}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tilemap Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
