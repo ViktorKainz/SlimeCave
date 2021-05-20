@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    //public GameObject hitEffect;
+    public GameObject hitEffect;
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        //GameOject effect = Instantiate(hitEffect, transform.position, Quaternion.identity)
-        //Destroy(effect, 5f)
+        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 0.5f);
+
+        if (other.gameObject.tag.Equals("Enemy"))
+        {
+            Debug.Log("Hit Enemy");
+        }
+        
         Destroy(gameObject);
     }
 }
