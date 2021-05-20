@@ -9,6 +9,9 @@ public class LevelGenerator : MonoBehaviour
     public int roomCount;
     public int levelSize;
 
+    public int width;
+    public int height;
+
     private GameObject[,] level;
     private Rooms rooms;
 
@@ -102,32 +105,33 @@ public class LevelGenerator : MonoBehaviour
                 {
                     if (level[y, x] == rooms.startRoom)
                     {
-                        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(x * 10, y * 10, -1);
+                        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(x * width, y * height, -1);
                     }
-                    level[y, x] = Instantiate(level[y, x], new Vector3(x * 10, y * 10), level[y, x].transform.rotation);
+                    level[y, x] = Instantiate(level[y, x], new Vector3(x * width, y * height), level[y, x].transform.rotation);
                     Tilemap map = level[y, x].transform.GetChild(1).gameObject.GetComponent<Tilemap>();
+                    BoundsInt bound = map.cellBounds;
                     if (y > 0 && level[y - 1, x] != null)
                     {
-                        map.SetTile(new Vector3Int(0, -5, 0), null);
-                        map.SetTile(new Vector3Int(-1, -5, 0), null);
+                        map.SetTile(new Vector3Int(0, bound.yMin, 0), null);
+                        map.SetTile(new Vector3Int(-1, bound.yMin, 0), null);
                     }
 
                     if (y < level.GetLength(0) - 1 && level[y + 1, x] != null)
                     {
-                        map.SetTile(new Vector3Int(0, 4, 0), null);
-                        map.SetTile(new Vector3Int(-1, 4, 0), null);
+                        map.SetTile(new Vector3Int(0, bound.yMax-1, 0), null);
+                        map.SetTile(new Vector3Int(-1, bound.yMax-1, 0), null);
                     }
 
                     if (x > 0 && level[y, x - 1] != null)
                     {
-                        map.SetTile(new Vector3Int(-5, 0, 0), null);
-                        map.SetTile(new Vector3Int(-5, -1, 0), null);
+                        map.SetTile(new Vector3Int(bound.xMin, 0, 0), null);
+                        map.SetTile(new Vector3Int(bound.xMin, -1, 0), null);
                     }
 
                     if (x < level.GetLength(1) - 1 && level[y, x + 1] != null)
                     {
-                        map.SetTile(new Vector3Int(4, 0, 0), null);
-                        map.SetTile(new Vector3Int(4, -1, 0), null);
+                        map.SetTile(new Vector3Int(bound.xMax-1, 0, 0), null);
+                        map.SetTile(new Vector3Int(bound.xMax-1, -1, 0), null);
                     }
                 }
             }
