@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public Camera cam;
     private Vector2 movement;
     private Vector2 mousePos;
-    private bool rotating = true;
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +38,5 @@ public class PlayerMovement : MonoBehaviour
         Vector2 lookDir = mousePos - player.position;
         float angle =(float) (Math.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 2f);
         weapon.transform.rotation = Quaternion.Euler(0, 0, angle);
-        
-        
-        
-        
-        
     }   
 }
