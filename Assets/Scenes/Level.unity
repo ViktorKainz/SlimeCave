@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2578473856039740276, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2578473856039740278, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
       propertyPath: m_Constraints
       value: 4
@@ -346,7 +350,11 @@ PrefabInstance:
     - target: {fileID: 2578473856039740279, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2131549805}
+    - target: {fileID: 2578473856039740279, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 7305138118078042752, guid: 21ef3bf60e14dd545be2e1b25fcdf9cc, type: 3}
     - target: {fileID: 2578473856039740281, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
       propertyPath: m_RootOrder
       value: 3
