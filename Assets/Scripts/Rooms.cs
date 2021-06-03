@@ -9,4 +9,6 @@ public class Rooms : MonoBehaviour
     public GameObject[] specialRooms;
     public GameObject[] cornerRooms;
 
+    public GameObject[] enemies;
+
 }

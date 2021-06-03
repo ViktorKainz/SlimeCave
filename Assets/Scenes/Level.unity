@@ -154,6 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomCount: 20
   levelSize: 7
+  maxEnemies: 5
+  boss: 0
   width: 20
   height: 10
   door1: {fileID: 11400000, guid: 93d82c8d653d311439fd53ad2a8dc0f8, type: 2}
@@ -210,6 +212,8 @@ MonoBehaviour:
   - {fileID: 3338491652302704088, guid: c4dd62caa7d9f2444b48d29b51685a6b, type: 3}
   - {fileID: 8802640630821716221, guid: 7a0fba2458311ec4ea12207ff7c225d0, type: 3}
   - {fileID: 9204925048940852401, guid: 745a95f2ae85f46449e7f38e0724fb70, type: 3}
+  enemies:
+  - {fileID: 622691624270082192, guid: 57d7e1c6da2260142875fa6b4190f01b, type: 3}
 --- !u!4 &974223034
 Transform:
   m_ObjectHideFlags: 0

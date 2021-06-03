@@ -8,6 +8,7 @@ public class LevelGenerator : MonoBehaviour
 {
     public int roomCount;
     public int levelSize;
+    public int maxEnemies;
     public bool boss;
 
     public int width;
@@ -18,6 +19,7 @@ public class LevelGenerator : MonoBehaviour
 
     private GameObject[,] plan;
     private GameObject[,] level;
+    private GameObject[,][] enemies;
     private Rooms rooms;
 
     // Start is called before the first frame update
@@ -25,6 +27,7 @@ public class LevelGenerator : MonoBehaviour
     {
         plan = new GameObject[levelSize, levelSize];
         level = new GameObject[levelSize, levelSize];
+        enemies = new GameObject[levelSize, levelSize][];
         rooms = (Rooms) GameObject.FindGameObjectWithTag("Rooms").GetComponent(typeof(Rooms));
         plan[levelSize / 2, levelSize / 2] = rooms.startRoom;
         if (roomCount > levelSize * levelSize)
@@ -113,6 +116,13 @@ public class LevelGenerator : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(x * width, y * height, -1);
                     }
                     level[y, x] = Instantiate(plan[y, x], new Vector3(x * width, y * height), plan[y, x].transform.rotation);
+                    var enemieCount = Random.Range(1, maxEnemies);
+                    enemies[y, x] = new GameObject[maxEnemies];
+                    for (int i = 0; i < enemieCount; i++)
+                    {
+                        GameObject enemy = rooms.enemies[Random.Range(0, rooms.enemies.Length)];
+                        enemies[y, x][i] = Instantiate(enemy, new Vector3(x * width + Random.Range(-width/2+1, width/2-1), y * height + Random.Range(-height/2+1, height/2-1), -1), enemy.transform.rotation);
+                    }
                     Tilemap map = level[y, x].transform.GetChild(1).gameObject.GetComponent<Tilemap>();
                     BoundsInt bound = map.cellBounds;
                     if (y > 0 && plan[y - 1, x] != null && 
