@@ -8,6 +8,7 @@ public class LevelGenerator : MonoBehaviour
 {
     public int roomCount;
     public int levelSize;
+    public bool boss;
 
     public int width;
     public int height;
@@ -18,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject[,] plan;
     private GameObject[,] level;
     private Rooms rooms;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,8 +52,7 @@ public class LevelGenerator : MonoBehaviour
 
             Next: ;
         }
-
-        bool boss = true;
+        
         while (boss)
         {
             var y = Random.Range(0, levelSize - 1);
