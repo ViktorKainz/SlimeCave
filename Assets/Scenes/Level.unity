@@ -154,6 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomCount: 20
   levelSize: 7
+  width: 20
+  height: 10
+  door1: {fileID: 11400000, guid: 93d82c8d653d311439fd53ad2a8dc0f8, type: 2}
+  door2: {fileID: 11400000, guid: bd4a271571e28904bb39182a2b96002e, type: 2}
 --- !u!4 &465256225
 Transform:
   m_ObjectHideFlags: 0
@@ -197,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f1164d0659b8442bfae489f735923a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startRoom: {fileID: 6811072890150697760, guid: f5e5a87a9e81d3f4189dfa8e82adebb6, type: 3}
+  startRoom: {fileID: 7254433433183901143, guid: 9bc32374d0b803e4a812c253c0777895, type: 3}
   normalRooms:
   - {fileID: 8773634849138124442, guid: 443b05bf6f9741846829fb434c947787, type: 3}
   specialRooms: []
