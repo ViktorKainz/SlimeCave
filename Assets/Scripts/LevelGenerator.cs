@@ -4,32 +4,34 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
+public struct Room
+{
+    public GameObject plan;
+    public GameObject room;
+    public GameObject[] enemies;
+    public bool cleared;
+}
+
 public class LevelGenerator : MonoBehaviour
 {
     public int roomCount;
     public int levelSize;
-    public int maxEnemies;
-    public bool boss;
-
     public int width;
     public int height;
-    
+    public int maxEnemies;
+    public bool boss;
     public Tile door1;
     public Tile door2;
 
-    private GameObject[,] plan;
-    private GameObject[,] level;
-    private GameObject[,][] enemies;
+    private Room[,] level;
     private Rooms rooms;
 
     // Start is called before the first frame update
     void Start()
     {
-        plan = new GameObject[levelSize, levelSize];
-        level = new GameObject[levelSize, levelSize];
-        enemies = new GameObject[levelSize, levelSize][];
+        level = new Room[levelSize, levelSize];
         rooms = (Rooms) GameObject.FindGameObjectWithTag("Rooms").GetComponent(typeof(Rooms));
-        plan[levelSize / 2, levelSize / 2] = rooms.startRoom;
+        level[levelSize / 2, levelSize / 2].plan = rooms.startRoom;
         if (roomCount > levelSize * levelSize)
         {
             roomCount = levelSize * levelSize;
@@ -41,13 +43,13 @@ public class LevelGenerator : MonoBehaviour
             {
                 foreach (int x in Enumerable.Range(0, levelSize).OrderBy(x => Random.Range(0, levelSize)))
                 {
-                    if ((plan[y, x] == null) && (
-                        (y > 0 && plan[y - 1, x] != null) || //north
-                        (x > 0 && plan[y, x - 1] != null) || //west
-                        (y < plan.GetLength(0) - 1 && plan[y + 1, x] != null) || //south
-                        (x < plan.GetLength(1) - 1 && plan[y, x + 1] != null))) //east
+                    if ((level[y, x].plan == null) && (
+                        (y > 0 && level[y - 1, x].plan != null) || //north
+                        (x > 0 && level[y, x - 1].plan != null) || //west
+                        (y < level.GetLength(0) - 1 && level[y + 1, x].plan != null) || //south
+                        (x < level.GetLength(1) - 1 && level[y, x + 1].plan != null))) //east
                     {
-                        plan[y, x] = rooms.normalRooms[Random.Range(0, rooms.normalRooms.Length)];
+                        level[y, x].plan = rooms.normalRooms[Random.Range(0, rooms.normalRooms.Length)];
                         goto Next;
                     }
                 }
@@ -60,46 +62,46 @@ public class LevelGenerator : MonoBehaviour
         {
             var y = Random.Range(0, levelSize - 1);
             var x = Random.Range(0, levelSize - 1);
-            if (plan[y, x] == null || plan[y, x] == rooms.startRoom) continue;
+            if (level[y, x].plan == null || level[y, x].plan == rooms.startRoom) continue;
             if (y + 1 < levelSize && x + 1 < levelSize &&
-                plan[y + 1, x] == null &&
-                plan[y, x + 1] == null &&
-                plan[y + 1, x + 1] == null)
+                level[y + 1, x].plan == null &&
+                level[y, x + 1].plan == null &&
+                level[y + 1, x + 1].plan == null)
             {
-                plan[y, x] = rooms.cornerRooms[2];
-                plan[y + 1, x] = rooms.cornerRooms[0];
-                plan[y, x + 1] = rooms.cornerRooms[3];
-                plan[y + 1, x + 1] = rooms.cornerRooms[1];
+                level[y, x].plan = rooms.cornerRooms[2];
+                level[y + 1, x].plan = rooms.cornerRooms[0];
+                level[y, x + 1].plan = rooms.cornerRooms[3];
+                level[y + 1, x + 1].plan = rooms.cornerRooms[1];
             }
             else if (y + 1 < levelSize && x > 0 &&
-                     plan[y + 1, x] == null &&
-                     plan[y, x - 1] == null &&
-                     plan[y + 1, x - 1] == null)
+                     level[y + 1, x].plan == null &&
+                     level[y, x - 1].plan == null &&
+                     level[y + 1, x - 1].plan == null)
             {
-                plan[y, x] = rooms.cornerRooms[3];
-                plan[y + 1, x] = rooms.cornerRooms[1];
-                plan[y, x - 1] = rooms.cornerRooms[2];
-                plan[y + 1, x - 1] = rooms.cornerRooms[0];
+                level[y, x].plan = rooms.cornerRooms[3];
+                level[y + 1, x].plan = rooms.cornerRooms[1];
+                level[y, x - 1].plan = rooms.cornerRooms[2];
+                level[y + 1, x - 1].plan = rooms.cornerRooms[0];
             }
             else if (y > 0 && x + 1 < levelSize && 
-                     plan[y - 1, x] == null &&
-                     plan[y, x + 1] == null &&
-                     plan[y - 1, x + 1] == null)
+                     level[y - 1, x].plan == null &&
+                     level[y, x + 1].plan == null &&
+                     level[y - 1, x + 1].plan == null)
             {
-                plan[y, x] = rooms.cornerRooms[0];
-                plan[y - 1, x] = rooms.cornerRooms[2];
-                plan[y, x + 1] = rooms.cornerRooms[1];
-                plan[y - 1, x + 1] = rooms.cornerRooms[3];
+                level[y, x].plan = rooms.cornerRooms[0];
+                level[y - 1, x].plan = rooms.cornerRooms[2];
+                level[y, x + 1].plan = rooms.cornerRooms[1];
+                level[y - 1, x + 1].plan = rooms.cornerRooms[3];
             }
             else if (y > 0 && x > 0 &&
-                     plan[y - 1, x] == null &&
-                     plan[y, x - 1] == null &&
-                     plan[y - 1, x - 1] == null)
+                     level[y - 1, x].plan == null &&
+                     level[y, x - 1].plan == null &&
+                     level[y - 1, x - 1].plan == null)
             {
-                plan[y, x] = rooms.cornerRooms[1];
-                plan[y - 1, x] = rooms.cornerRooms[3];
-                plan[y, x - 1] = rooms.cornerRooms[0];
-                plan[y - 1, x - 1] = rooms.cornerRooms[2];
+                level[y, x].plan = rooms.cornerRooms[1];
+                level[y - 1, x].plan = rooms.cornerRooms[3];
+                level[y, x - 1].plan = rooms.cornerRooms[0];
+                level[y - 1, x - 1].plan = rooms.cornerRooms[2];
             }
             else continue;
             boss = false;
@@ -109,45 +111,46 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int x = 0; x < levelSize; x++)
             {
-                if (plan[y, x] != null)
+                if (level[y, x].plan != null)
                 {
-                    if (plan[y, x] == rooms.startRoom)
+                    if (level[y, x].plan == rooms.startRoom)
                     {
                         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(x * width, y * height, -1);
                     }
-                    level[y, x] = Instantiate(plan[y, x], new Vector3(x * width, y * height), plan[y, x].transform.rotation);
+                    level[y, x].room = Instantiate(level[y, x].plan, new Vector3(x * width, y * height), level[y, x].plan.transform.rotation);
                     var enemieCount = Random.Range(1, maxEnemies);
-                    enemies[y, x] = new GameObject[maxEnemies];
+                    level[y, x].enemies = new GameObject[maxEnemies];
+                    level[y, x].cleared = false;
                     for (int i = 0; i < enemieCount; i++)
                     {
                         GameObject enemy = rooms.enemies[Random.Range(0, rooms.enemies.Length)];
-                        enemies[y, x][i] = Instantiate(enemy, new Vector3(x * width + Random.Range(-width/2+1, width/2-1), y * height + Random.Range(-height/2+1, height/2-1), -1), enemy.transform.rotation);
+                        level[y, x].enemies[i] = Instantiate(enemy, new Vector3(x * width + Random.Range(-width/2+1, width/2-1), y * height + Random.Range(-height/2+1, height/2-1), -1), enemy.transform.rotation);
                     }
-                    Tilemap map = level[y, x].transform.GetChild(1).gameObject.GetComponent<Tilemap>();
+                    Tilemap map = level[y, x].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
                     BoundsInt bound = map.cellBounds;
-                    if (y > 0 && plan[y - 1, x] != null && 
-                        !(rooms.cornerRooms.Contains(plan[y, x]) && rooms.cornerRooms.Contains(plan[y - 1, x])))
+                    if (y > 0 && level[y - 1, x].plan != null && 
+                        !(rooms.cornerRooms.Contains(level[y, x].plan) && rooms.cornerRooms.Contains(level[y - 1, x].plan)))
                     {
                         map.SetTile(new Vector3Int(0, bound.yMin, 0), door1);
                         map.SetTile(new Vector3Int(-1, bound.yMin, 0), door2);
                     }
 
-                    if (y < plan.GetLength(0) - 1 && plan[y + 1, x] != null && 
-                        !(rooms.cornerRooms.Contains(plan[y, x]) && rooms.cornerRooms.Contains(plan[y + 1, x])))
+                    if (y < level.GetLength(0) - 1 && level[y + 1, x].plan != null && 
+                        !(rooms.cornerRooms.Contains(level[y, x].plan) && rooms.cornerRooms.Contains(level[y + 1, x].plan)))
                     {
                         map.SetTile(new Vector3Int(0, bound.yMax-1, 0), door2);
                         map.SetTile(new Vector3Int(-1, bound.yMax-1, 0), door1);
                     }
 
-                    if (x > 0 && plan[y, x - 1] != null && 
-                        !(rooms.cornerRooms.Contains(plan[y, x]) && rooms.cornerRooms.Contains(plan[y, x - 1])))
+                    if (x > 0 && level[y, x - 1].plan != null && 
+                        !(rooms.cornerRooms.Contains(level[y, x].plan) && rooms.cornerRooms.Contains(level[y, x - 1].plan)))
                     {
                         map.SetTile(new Vector3Int(bound.xMin, 0, 0), door2);
                         map.SetTile(new Vector3Int(bound.xMin, -1, 0), door1);
                     }
 
-                    if (x < plan.GetLength(1) - 1 && plan[y, x + 1] != null && 
-                        !(rooms.cornerRooms.Contains(plan[y, x]) && rooms.cornerRooms.Contains(plan[y, x + 1])))
+                    if (x < level.GetLength(1) - 1 && level[y, x + 1].plan != null && 
+                        !(rooms.cornerRooms.Contains(level[y, x].plan) && rooms.cornerRooms.Contains(level[y, x + 1].plan)))
                     {
                         map.SetTile(new Vector3Int(bound.xMax-1, 0, 0), door1);
                         map.SetTile(new Vector3Int(bound.xMax-1, -1, 0), door2);
@@ -160,5 +163,12 @@ public class LevelGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for (int y = 0; y < levelSize; y++)
+        {
+            for (int x = 0; x < levelSize; x++)
+            {
+                //Check if all enemies in room are defeated and remove doors
+            }
+        }
     }
 }
