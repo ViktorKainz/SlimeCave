@@ -3013,62 +3013,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5898341058294426490, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
+      propertyPath: startTimeBtwAttack
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
---- !u!1001 &6034621169943588311
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -21.916775
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 481921448180547881, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1057249377151188525, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}
-      propertyPath: m_Name
-      value: MeeleParticel
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 371ebd8b7a6365a469c65a724230631a, type: 3}

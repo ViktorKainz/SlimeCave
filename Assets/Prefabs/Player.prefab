@@ -340,4 +340,4 @@ MonoBehaviour:
     m_Bits: 64
   attackRange: 1
   attackDmg: 1
-  AttackParticleSystem: {fileID: 8586907423501828925, guid: e581b0f65acba4b489aad83429403dda, type: 3}
+  AttackParticleSystem: {fileID: 7305138118078042752, guid: 21ef3bf60e14dd545be2e1b25fcdf9cc, type: 3}

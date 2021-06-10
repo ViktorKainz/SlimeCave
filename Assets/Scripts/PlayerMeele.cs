@@ -17,22 +17,21 @@ public class PlayerMeele : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeBtwAttack <= 0)
+        
+        if (timeBtwAttack < 0)
         {
-            //todo fix this if
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (!Input.GetKeyDown(KeyCode.Space)) return;
+            var effect = Instantiate(AttackParticleSystem, attackPos.position, Quaternion.identity);
+            Destroy(effect, 0.5f);
+            //ToDo implement Enemy script with health var or function
+            var enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
+            Debug.Log(enemiesToDamage);
+            for (var i = 0; i < enemiesToDamage.Length; i++)
             {
-                Debug.Log("Space pressed");
-                GameObject effect = Instantiate(AttackParticleSystem, attackPos.position, Quaternion.identity);
-                Destroy(effect, 5f);
-                //ToDo implement Enemy script wiht health var or funktion
-                //Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                //for (int i = 0; i < enemiesToDamage.Length; i++)
-                //{
-                    //enemiesToDamage[i].GetComponent<Enemy>().health -= damage;
-                //}
-
+                Debug.Log("Hit");
+                //enemiesToDamage[i].GetComponent<Enemy>().health -= attackDmg;
             }
+
             timeBtwAttack = startTimeBtwAttack;
         }
         else
