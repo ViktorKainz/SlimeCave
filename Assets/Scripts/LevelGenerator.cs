@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,7 +9,7 @@ public struct Room
 {
     public GameObject plan;
     public GameObject room;
-    public GameObject[] enemies;
+    public List<GameObject> enemies;
     public bool cleared;
 }
 
@@ -119,12 +120,12 @@ public class LevelGenerator : MonoBehaviour
                     }
                     level[y, x].room = Instantiate(level[y, x].plan, new Vector3(x * width, y * height), level[y, x].plan.transform.rotation);
                     var enemieCount = Random.Range(1, maxEnemies);
-                    level[y, x].enemies = new GameObject[maxEnemies];
+                    level[y, x].enemies = new List<GameObject>();
                     level[y, x].cleared = false;
                     for (int i = 0; i < enemieCount; i++)
                     {
                         GameObject enemy = rooms.enemies[Random.Range(0, rooms.enemies.Length)];
-                        level[y, x].enemies[i] = Instantiate(enemy, new Vector3(x * width + Random.Range(-width/2+1, width/2-1), y * height + Random.Range(-height/2+1, height/2-1), -1), enemy.transform.rotation);
+                        level[y, x].enemies.Add(Instantiate(enemy, new Vector3(x * width + Random.Range(-width/2+1, width/2-1), y * height + Random.Range(-height/2+1, height/2-1), -1), enemy.transform.rotation));
                     }
                     Tilemap map = level[y, x].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
                     BoundsInt bound = map.cellBounds;
@@ -156,6 +157,10 @@ public class LevelGenerator : MonoBehaviour
                         map.SetTile(new Vector3Int(bound.xMax-1, -1, 0), door2);
                     }
                 }
+                else
+                {
+                    level[y, x].cleared = true;
+                }
             }
         }
     }
@@ -167,7 +172,70 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int x = 0; x < levelSize; x++)
             {
-                //Check if all enemies in room are defeated and remove doors
+                if (!level[y, x].cleared)
+                {
+                    level[y, x].cleared = true;
+                    foreach (var e in level[y,x].enemies)
+                    {
+                        if (e != null) 
+                        {
+                            level[y, x].cleared = false;
+                            break;
+                        }
+                    }
+
+                    if (level[y, x].cleared)
+                    {
+                        Tilemap map = level[y, x].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
+                        BoundsInt bound = map.cellBounds;
+                        //Bottom
+                        if (y > 0 && level[y - 1, x].plan != null && 
+                            !(rooms.cornerRooms.Contains(level[y, x].plan) && rooms.cornerRooms.Contains(level[y - 1, x].plan)))
+                        {
+                            map.SetTile(new Vector3Int(0, bound.yMin, 0), null);
+                            map.SetTile(new Vector3Int(-1, bound.yMin, 0), null);
+                            Tilemap b_map = level[y - 1, x].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
+                            BoundsInt b_bound = map.cellBounds;
+                            b_map.SetTile(new Vector3Int(0, b_bound.yMax-1, 0), null);
+                            b_map.SetTile(new Vector3Int(-1, b_bound.yMax-1, 0), null);
+                        }
+
+                        //Top
+                        if (y < level.GetLength(0) - 1 && level[y + 1, x].plan != null && 
+                            !(rooms.cornerRooms.Contains(level[y, x].plan) && rooms.cornerRooms.Contains(level[y + 1, x].plan)))
+                        {
+                            map.SetTile(new Vector3Int(0, bound.yMax-1, 0), null);
+                            map.SetTile(new Vector3Int(-1, bound.yMax-1, 0), null);
+                            Tilemap t_map = level[y + 1, x].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
+                            BoundsInt t_bound = map.cellBounds;
+                            t_map.SetTile(new Vector3Int(0, t_bound.yMin, 0), null);
+                            t_map.SetTile(new Vector3Int(-1, t_bound.yMin, 0), null);
+                        }
+
+                        //Left
+                        if (x > 0 && level[y, x - 1].plan != null && 
+                            !(rooms.cornerRooms.Contains(level[y, x].plan) && rooms.cornerRooms.Contains(level[y, x - 1].plan)))
+                        {
+                            map.SetTile(new Vector3Int(bound.xMin, 0, 0), null);
+                            map.SetTile(new Vector3Int(bound.xMin, -1, 0), null);
+                            Tilemap l_map = level[y, x - 1].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
+                            BoundsInt l_bound = map.cellBounds;
+                            l_map.SetTile(new Vector3Int(l_bound.xMax-1, 0, 0), null);
+                            l_map.SetTile(new Vector3Int(l_bound.xMax-1, -1, 0), null);
+                        }
+
+                        if (x < level.GetLength(1) - 1 && level[y, x + 1].plan != null && 
+                            !(rooms.cornerRooms.Contains(level[y, x].plan) && rooms.cornerRooms.Contains(level[y, x + 1].plan)))
+                        {
+                            map.SetTile(new Vector3Int(bound.xMax-1, 0, 0), null);
+                            map.SetTile(new Vector3Int(bound.xMax-1, -1, 0), null);
+                            Tilemap r_map = level[y, x + 1].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
+                            BoundsInt r_bound = map.cellBounds;
+                            r_map.SetTile(new Vector3Int(r_bound.xMin, 0, 0), null);
+                            r_map.SetTile(new Vector3Int(r_bound.xMin, -1, 0), null);
+                        }
+                    }
+                }
             }
         }
     }

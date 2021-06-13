@@ -154,10 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomCount: 20
   levelSize: 7
-  maxEnemies: 5
-  boss: 0
   width: 20
   height: 10
+  maxEnemies: 5
+  boss: 0
   door1: {fileID: 11400000, guid: 93d82c8d653d311439fd53ad2a8dc0f8, type: 2}
   door2: {fileID: 11400000, guid: bd4a271571e28904bb39182a2b96002e, type: 2}
 --- !u!4 &465256225
@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2131549805}
+    - target: {fileID: 2704642712089422972, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
 --- !u!1 &2131549803
