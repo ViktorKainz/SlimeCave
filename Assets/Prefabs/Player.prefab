@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 2855937943046911645}
   - component: {fileID: 3147862947283060964}
   - component: {fileID: 1432128708113700736}
-  - component: {fileID: 5898341058294426490}
+  - component: {fileID: 3100869960971343101}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -321,7 +321,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 0.9}
   m_Direction: 1
---- !u!114 &5898341058294426490
+--- !u!114 &3100869960971343101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,11 +333,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77a954f214934934691c70b44f1a5fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimeBtwAttack: 0.3
+  startTimeBtwAttack: 1
   attackPos: {fileID: 5898341059476829320}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 64
   attackRange: 1
-  attackDmg: 1
-  AttackParticleSystem: {fileID: 7305138118078042752, guid: 21ef3bf60e14dd545be2e1b25fcdf9cc, type: 3}
+  attackDmg: 0
+  AttackParticleSystem: {fileID: 6997708923493635906, guid: 30266806e53397c13a0edb23e70ce8c0, type: 3}

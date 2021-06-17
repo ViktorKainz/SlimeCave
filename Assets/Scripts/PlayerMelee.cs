@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMeele : MonoBehaviour
+public class PlayerMelee : MonoBehaviour
 {
     private float timeBtwAttack;
     public float startTimeBtwAttack;
@@ -25,10 +25,8 @@ public class PlayerMeele : MonoBehaviour
             Destroy(effect, 0.5f);
             //ToDo implement Enemy script with health var or function
             var enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-            Debug.Log(enemiesToDamage);
             for (var i = 0; i < enemiesToDamage.Length; i++)
             {
-                Debug.Log("Hit");
                 //enemiesToDamage[i].GetComponent<Enemy>().health -= attackDmg;
             }
 
