@@ -536,14 +536,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2131549805}
-    - target: {fileID: 2704642712089422972, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5983081561311365547, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
-      propertyPath: health
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
 --- !u!1 &2131549803

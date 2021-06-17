@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Animator animator;
     public int health;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amount)
     {
         health--;
+        animator.SetBool("hit", true);
         if (health <= 0)
         {
             Debug.Log("Dead");

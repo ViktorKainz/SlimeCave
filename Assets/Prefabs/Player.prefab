@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7b7333ca6ddd8d3b804797211ce6a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   animator: {fileID: 2704642712089422974}
   player: {fileID: 2704642712089422975}
   weapon: {fileID: 2704642713331135897}
@@ -173,6 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63034accd0111be4a90f52f18879722a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 2704642712089422974}
+  health: 20
 --- !u!1 &2704642713331135897
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +256,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2704642713331135902
