@@ -30,8 +30,13 @@ public class LevelGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rooms = GameObject.FindGameObjectWithTag("Rooms").GetComponent<Rooms>();
+        GenerateLevel();
+    }
+
+    void GenerateLevel()
+    {
         level = new Room[levelSize, levelSize];
-        rooms = (Rooms) GameObject.FindGameObjectWithTag("Rooms").GetComponent(typeof(Rooms));
         level[levelSize / 2, levelSize / 2].plan = rooms.startRoom;
         if (roomCount > levelSize * levelSize)
         {

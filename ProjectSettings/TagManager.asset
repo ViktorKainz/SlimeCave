@@ -9,6 +9,8 @@ TagManager:
   - RoomTemplates
   - StartPoint
   - Enemy
+  - Generator
+  - Floor
   layers:
   - Default
   - TransparentFX
