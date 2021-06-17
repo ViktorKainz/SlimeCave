@@ -125,6 +125,9 @@ public class LevelGenerator : MonoBehaviour
                     for (int i = 0; i < enemieCount; i++)
                     {
                         GameObject enemy = rooms.enemies[Random.Range(0, rooms.enemies.Length)];
+                        Enemy e = enemy.GetComponent<Enemy>();
+                        e.roomPosition = new Vector2(x * width, y * height);
+                        e.roomSize = new Vector2(width, height);
                         level[y, x].enemies.Add(Instantiate(enemy, new Vector3(x * width + Random.Range(-width/2+1, width/2-1), y * height + Random.Range(-height/2+1, height/2-1), -1), enemy.transform.rotation));
                     }
                     Tilemap map = level[y, x].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();

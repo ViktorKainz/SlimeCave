@@ -5,7 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int health;
-    
+    public Vector2 roomPosition;
+    public Vector2 roomSize;
     
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,6 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
-            gameObject.SetActive(false);
         }
     }
 }

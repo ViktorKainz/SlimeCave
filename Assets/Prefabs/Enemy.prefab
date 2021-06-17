@@ -140,7 +140,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.35}
+  m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
 --- !u!114 &5085762411711308743
@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  roomPosition: {x: 0, y: 0}
+  roomSize: {x: 0, y: 0}
 --- !u!114 &6000375619731111763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,3 +170,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac28f19975979e040923f2ca9762688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
+  attackCooldown: 2
