@@ -34,7 +34,7 @@ public class LevelGenerator : MonoBehaviour
         GenerateLevel();
     }
 
-    void GenerateLevel()
+    public void GenerateLevel()
     {
         level = new Room[levelSize, levelSize];
         level[levelSize / 2, levelSize / 2].plan = rooms.startRoom;
@@ -60,9 +60,30 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
             }
-
             Next: ;
         }
+
+        int maxDistance = 0;
+        int maxX = 0;
+        int maxY = 0;
+        foreach (int y in Enumerable.Range(0, levelSize).OrderBy(x => Random.Range(0, levelSize)))
+        {
+            foreach (int x in Enumerable.Range(0, levelSize).OrderBy(x => Random.Range(0, levelSize)))
+            {
+                if (level[y, x].plan != null)
+                {
+                    int distance = Math.Abs(levelSize / 2 - y) + Math.Abs(levelSize / 2 - x);
+                    if (distance > maxDistance)
+                    {
+                        maxDistance = distance;
+                        maxX = x;
+                        maxY = y;
+                    }
+                }
+            }
+        }
+
+        level[maxY, maxX].plan = rooms.holeRoom;
         
         while (boss)
         {
@@ -244,6 +265,27 @@ public class LevelGenerator : MonoBehaviour
                         }
                     }
                 }
+            }
+        }
+    }
+
+    public void RemoveLevel()
+    {
+        for (int y = 0; y < levelSize; y++)
+        {
+            for (int x = 0; x < levelSize; x++)
+            {
+                if (!level[y, x].cleared)
+                {
+                    foreach (var e in level[y, x].enemies)
+                    {
+                        if (e != null)
+                        {
+                            Destroy(e);
+                        }
+                    }
+                }
+                Destroy(level[y, x].room);
             }
         }
     }

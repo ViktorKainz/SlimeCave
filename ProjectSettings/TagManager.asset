@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - Generator
   - Floor
+  - Hole
+  - Health
   layers:
   - Default
   - TransparentFX

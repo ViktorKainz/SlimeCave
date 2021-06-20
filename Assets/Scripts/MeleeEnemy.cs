@@ -42,6 +42,13 @@ public class MeleeEnemy : MonoBehaviour
         {
             difference.x = playerPosition.x - enemyPosition.x;
             difference.y = playerPosition.y - enemyPosition.y;
+            if (difference.x > -1.1 && difference.x < 1.1 &&
+                difference.y > -1.1 && difference.y < 1.1 &&
+                timer >= attackCooldown)
+            {
+                p.TakeDamage(damage);
+                timer = 0f;
+            }
         }
         else
         {
@@ -72,13 +79,6 @@ public class MeleeEnemy : MonoBehaviour
         else if (difference.y < -1)
         {
             enemyPosition.y -= 0.01f;
-        }
-        if (difference.x > -1.1 && difference.x < 1.1 &&
-            difference.y > -1.1 && difference.y < 1.1 &&
-            timer >= attackCooldown)
-        {
-            p.TakeDamage(damage);
-            timer = 0f;
         }
         transform.position = enemyPosition;
     }
