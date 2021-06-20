@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
         animator.SetBool("hit", true);
         if (health <= 0)
         {
-            
             generator.GenerateLevel();
             health = maxHealth;
             floor = 1;
@@ -50,8 +49,6 @@ public class Player : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collision");
-        Debug.Log(other.gameObject.tag);
         if (other.gameObject.CompareTag("Hole"))
         {
             generator.RemoveLevel();

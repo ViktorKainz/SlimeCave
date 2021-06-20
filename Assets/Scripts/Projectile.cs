@@ -15,7 +15,6 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.tag.Equals("Enemy"))
         {
             other.gameObject.GetComponent<Enemy>().TakeDamage(1);
-            Debug.Log("Hit Enemy");
         }
         
         Destroy(gameObject);
