@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public int maxHealth;
+    public Animator animator;
 
     private int health;
     private Text healthCounter;
@@ -15,7 +16,7 @@ public class Player : MonoBehaviour
     private Text floorCounter;
 
     private LevelGenerator generator;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amount)
     {
         health--;
+        animator.SetBool("hit", true);
         if (health <= 0)
         {
             
