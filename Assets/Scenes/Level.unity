@@ -337,6 +337,7 @@ MonoBehaviour:
   width: 20
   height: 10
   maxEnemies: 5
+  maxDecoration: 10
   boss: 0
   door1: {fileID: 11400000, guid: 93d82c8d653d311439fd53ad2a8dc0f8, type: 2}
   door2: {fileID: 11400000, guid: bd4a271571e28904bb39182a2b96002e, type: 2}
@@ -395,6 +396,20 @@ MonoBehaviour:
   - {fileID: 9204925048940852401, guid: 745a95f2ae85f46449e7f38e0724fb70, type: 3}
   enemies:
   - {fileID: 622691624270082192, guid: 57d7e1c6da2260142875fa6b4190f01b, type: 3}
+  decoration:
+  - {fileID: 11400000, guid: 7387da66020b080499110f1e5570d247, type: 2}
+  - {fileID: 11400000, guid: dc3ee07be6fc4324d9c26030e26784b1, type: 2}
+  - {fileID: 11400000, guid: 3af1b3efed6bdf840b21ded202f02662, type: 2}
+  - {fileID: 11400000, guid: 34ef3f5f2649b9941972ae733f3c61e4, type: 2}
+  - {fileID: 11400000, guid: 866557a12685709419bf61e8152c13f2, type: 2}
+  - {fileID: 11400000, guid: bc19e9401714a6a47816f9ae65b49512, type: 2}
+  - {fileID: 11400000, guid: d4fdb97749c4b91439929a2e98552344, type: 2}
+  - {fileID: 11400000, guid: c28d4a146d787de49aa7ed9136bc1754, type: 2}
+  - {fileID: 11400000, guid: 2afcd134ea0f5e248b70871668e44473, type: 2}
+  - {fileID: 11400000, guid: 1d371cb81cdeb3a40acc372b1a274822, type: 2}
+  - {fileID: 11400000, guid: 35607ca9e8b347d4fa93357144945fbc, type: 2}
+  - {fileID: 11400000, guid: 45d6e1f9e7d2aaa429d8d55474fee675, type: 2}
+  - {fileID: 11400000, guid: 2fc1c2411a6b8aa458a29bf4142058f0, type: 2}
 --- !u!4 &974223034
 Transform:
   m_ObjectHideFlags: 0

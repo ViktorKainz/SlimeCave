@@ -20,6 +20,7 @@ public class LevelGenerator : MonoBehaviour
     public int width;
     public int height;
     public int maxEnemies;
+    public int maxDecoration;
     public bool boss;
     public Tile door1;
     public Tile door2;
@@ -142,64 +143,73 @@ public class LevelGenerator : MonoBehaviour
             {
                 if (level[y, x].plan != null)
                 {
+                    level[y, x].room = Instantiate(level[y, x].plan, new Vector3(x * width, y * height),
+                        level[y, x].plan.transform.rotation);
+                    level[y, x].room.transform.parent = transform;
+                    level[y, x].enemies = new List<GameObject>();
+                    level[y, x].cleared = false;
+                    var decorationCount = Random.Range(1, maxDecoration);
+                    Tilemap decorationMap = level[y, x].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
+                    for (int i = 0; i < decorationCount; i++)
+                    {
+                        decorationMap.SetTile(new Vector3Int(Random.Range(-width/2 + 1, width/2 - 1), 
+                            Random.Range(-height/2 + 1, height/2 - 1), 0), rooms.decoration[Random.Range(0, rooms.decoration.Length)]);
+                    }
                     if (level[y, x].plan == rooms.startRoom)
                     {
                         GameObject.FindGameObjectWithTag("Player").transform.position =
                             new Vector3(x * width, y * height, -1);
                     }
-
-                    level[y, x].room = Instantiate(level[y, x].plan, new Vector3(x * width, y * height),
-                        level[y, x].plan.transform.rotation);
-                    level[y, x].room.transform.parent = transform;
-                    var enemieCount = Random.Range(1, maxEnemies);
-                    level[y, x].enemies = new List<GameObject>();
-                    level[y, x].cleared = false;
-                    for (int i = 0; i < enemieCount; i++)
+                    else
                     {
-                        GameObject enemy = rooms.enemies[Random.Range(0, rooms.enemies.Length)];
-                        Enemy e = enemy.GetComponent<Enemy>();
-                        e.roomPosition = new Vector2(x * width, y * height);
-                        e.roomSize = new Vector2(width, height);
-                        GameObject instance = Instantiate(enemy,
-                            new Vector3(x * width + Random.Range(-width / 2 + 1, width / 2 - 1),
-                                y * height + Random.Range(-height / 2 + 1, height / 2 - 1), -1),
-                            enemy.transform.rotation);
-                        instance.transform.parent = level[y, x].room.transform;
-                        level[y, x].enemies.Add(instance);
-                    }
+                        var enemieCount = Random.Range(1, maxEnemies);
+                        for (int i = 0; i < enemieCount; i++)
+                        {
+                            GameObject enemy = rooms.enemies[Random.Range(0, rooms.enemies.Length)];
+                            Enemy e = enemy.GetComponent<Enemy>();
+                            e.roomPosition = new Vector2(x * width, y * height);
+                            e.roomSize = new Vector2(width, height);
+                            GameObject instance = Instantiate(enemy,
+                                new Vector3(x * width + Random.Range(-width / 2 + 1, width / 2 - 1),
+                                    y * height + Random.Range(-height / 2 + 1, height / 2 - 1), -1),
+                                enemy.transform.rotation);
+                            instance.transform.parent = level[y, x].room.transform;
+                            level[y, x].enemies.Add(instance);
+                        }
 
-                    Tilemap map = level[y, x].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
-                    BoundsInt bound = map.cellBounds;
-                    if (y > 0 && level[y - 1, x].plan != null &&
-                        !(rooms.cornerRooms.Contains(level[y, x].plan) &&
-                          rooms.cornerRooms.Contains(level[y - 1, x].plan)))
-                    {
-                        map.SetTile(new Vector3Int(0, bound.yMin, 0), door1);
-                        map.SetTile(new Vector3Int(-1, bound.yMin, 0), door2);
-                    }
+                        Tilemap map = level[y, x].room.transform.GetChild(2).gameObject.GetComponent<Tilemap>();
+                        BoundsInt bound = map.cellBounds;
+                        if (y > 0 && level[y - 1, x].plan != null &&
+                            !(rooms.cornerRooms.Contains(level[y, x].plan) &&
+                              rooms.cornerRooms.Contains(level[y - 1, x].plan)))
+                        {
+                            map.SetTile(new Vector3Int(0, bound.yMin, 0), door1);
+                            map.SetTile(new Vector3Int(-1, bound.yMin, 0), door2);
+                        }
 
-                    if (y < level.GetLength(0) - 1 && level[y + 1, x].plan != null &&
-                        !(rooms.cornerRooms.Contains(level[y, x].plan) &&
-                          rooms.cornerRooms.Contains(level[y + 1, x].plan)))
-                    {
-                        map.SetTile(new Vector3Int(0, bound.yMax - 1, 0), door2);
-                        map.SetTile(new Vector3Int(-1, bound.yMax - 1, 0), door1);
-                    }
+                        if (y < level.GetLength(0) - 1 && level[y + 1, x].plan != null &&
+                            !(rooms.cornerRooms.Contains(level[y, x].plan) &&
+                              rooms.cornerRooms.Contains(level[y + 1, x].plan)))
+                        {
+                            map.SetTile(new Vector3Int(0, bound.yMax - 1, 0), door2);
+                            map.SetTile(new Vector3Int(-1, bound.yMax - 1, 0), door1);
+                        }
 
-                    if (x > 0 && level[y, x - 1].plan != null &&
-                        !(rooms.cornerRooms.Contains(level[y, x].plan) &&
-                          rooms.cornerRooms.Contains(level[y, x - 1].plan)))
-                    {
-                        map.SetTile(new Vector3Int(bound.xMin, 0, 0), door2);
-                        map.SetTile(new Vector3Int(bound.xMin, -1, 0), door1);
-                    }
+                        if (x > 0 && level[y, x - 1].plan != null &&
+                            !(rooms.cornerRooms.Contains(level[y, x].plan) &&
+                              rooms.cornerRooms.Contains(level[y, x - 1].plan)))
+                        {
+                            map.SetTile(new Vector3Int(bound.xMin, 0, 0), door2);
+                            map.SetTile(new Vector3Int(bound.xMin, -1, 0), door1);
+                        }
 
-                    if (x < level.GetLength(1) - 1 && level[y, x + 1].plan != null &&
-                        !(rooms.cornerRooms.Contains(level[y, x].plan) &&
-                          rooms.cornerRooms.Contains(level[y, x + 1].plan)))
-                    {
-                        map.SetTile(new Vector3Int(bound.xMax - 1, 0, 0), door1);
-                        map.SetTile(new Vector3Int(bound.xMax - 1, -1, 0), door2);
+                        if (x < level.GetLength(1) - 1 && level[y, x + 1].plan != null &&
+                            !(rooms.cornerRooms.Contains(level[y, x].plan) &&
+                              rooms.cornerRooms.Contains(level[y, x + 1].plan)))
+                        {
+                            map.SetTile(new Vector3Int(bound.xMax - 1, 0, 0), door1);
+                            map.SetTile(new Vector3Int(bound.xMax - 1, -1, 0), door2);
+                        }
                     }
                 }
                 else
@@ -231,7 +241,7 @@ public class LevelGenerator : MonoBehaviour
 
                     if (level[y, x].cleared)
                     {
-                        Tilemap map = level[y, x].room.transform.GetChild(1).gameObject.GetComponent<Tilemap>();
+                        Tilemap map = level[y, x].room.transform.GetChild(2).gameObject.GetComponent<Tilemap>();
                         BoundsInt bound = map.cellBounds;
                         //Bottom
                         if (y > 0 && level[y - 1, x].plan != null &&
@@ -240,7 +250,7 @@ public class LevelGenerator : MonoBehaviour
                         {
                             map.SetTile(new Vector3Int(0, bound.yMin, 0), null);
                             map.SetTile(new Vector3Int(-1, bound.yMin, 0), null);
-                            Tilemap b_map = level[y - 1, x].room.transform.GetChild(1).gameObject
+                            Tilemap b_map = level[y - 1, x].room.transform.GetChild(2).gameObject
                                 .GetComponent<Tilemap>();
                             BoundsInt b_bound = map.cellBounds;
                             b_map.SetTile(new Vector3Int(0, b_bound.yMax - 1, 0), null);
@@ -254,7 +264,7 @@ public class LevelGenerator : MonoBehaviour
                         {
                             map.SetTile(new Vector3Int(0, bound.yMax - 1, 0), null);
                             map.SetTile(new Vector3Int(-1, bound.yMax - 1, 0), null);
-                            Tilemap t_map = level[y + 1, x].room.transform.GetChild(1).gameObject
+                            Tilemap t_map = level[y + 1, x].room.transform.GetChild(2).gameObject
                                 .GetComponent<Tilemap>();
                             BoundsInt t_bound = map.cellBounds;
                             t_map.SetTile(new Vector3Int(0, t_bound.yMin, 0), null);
@@ -268,7 +278,7 @@ public class LevelGenerator : MonoBehaviour
                         {
                             map.SetTile(new Vector3Int(bound.xMin, 0, 0), null);
                             map.SetTile(new Vector3Int(bound.xMin, -1, 0), null);
-                            Tilemap l_map = level[y, x - 1].room.transform.GetChild(1).gameObject
+                            Tilemap l_map = level[y, x - 1].room.transform.GetChild(2).gameObject
                                 .GetComponent<Tilemap>();
                             BoundsInt l_bound = map.cellBounds;
                             l_map.SetTile(new Vector3Int(l_bound.xMax - 1, 0, 0), null);
@@ -281,7 +291,7 @@ public class LevelGenerator : MonoBehaviour
                         {
                             map.SetTile(new Vector3Int(bound.xMax - 1, 0, 0), null);
                             map.SetTile(new Vector3Int(bound.xMax - 1, -1, 0), null);
-                            Tilemap r_map = level[y, x + 1].room.transform.GetChild(1).gameObject
+                            Tilemap r_map = level[y, x + 1].room.transform.GetChild(2).gameObject
                                 .GetComponent<Tilemap>();
                             BoundsInt r_bound = map.cellBounds;
                             r_map.SetTile(new Vector3Int(r_bound.xMin, 0, 0), null);

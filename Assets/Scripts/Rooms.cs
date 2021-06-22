@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Rooms : MonoBehaviour
 {
@@ -11,5 +12,5 @@ public class Rooms : MonoBehaviour
     public GameObject[] cornerRooms;
 
     public GameObject[] enemies;
-
+    public Tile[] decoration;
 }
