@@ -396,6 +396,8 @@ MonoBehaviour:
   - {fileID: 9204925048940852401, guid: 745a95f2ae85f46449e7f38e0724fb70, type: 3}
   enemies:
   - {fileID: 622691624270082192, guid: 57d7e1c6da2260142875fa6b4190f01b, type: 3}
+  - {fileID: 9126179771667472746, guid: e645d13e5292e1b4ab5fecb9b8197b4c, type: 3}
+  - {fileID: 8706918673811966332, guid: 110e7f62693f50e41bcc2f1123decfaf, type: 3}
   decoration:
   - {fileID: 11400000, guid: 7387da66020b080499110f1e5570d247, type: 2}
   - {fileID: 11400000, guid: dc3ee07be6fc4324d9c26030e26784b1, type: 2}

@@ -12,6 +12,7 @@ public class MeleeEnemy : MonoBehaviour
 {
     public int damage;
     public float attackCooldown;
+    public float speed;
         
     private GameObject player;
     private Player p;
@@ -66,19 +67,19 @@ public class MeleeEnemy : MonoBehaviour
         }
         if (difference.x > 1)
         {
-            enemyPosition.x += 0.01f;
+            enemyPosition.x += speed/100;
         }
         else if (difference.x < -1)
         {
-            enemyPosition.x -= 0.01f;
+            enemyPosition.x -= speed/100;
         }
         if (difference.y > 1)
         {
-            enemyPosition.y += 0.01f;
+            enemyPosition.y += speed/100;
         }
         else if (difference.y < -1)
         {
-            enemyPosition.y -= 0.01f;
+            enemyPosition.y -= speed/100;
         }
         transform.position = enemyPosition;
     }
