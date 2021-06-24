@@ -11,7 +11,7 @@ public class PlayerMelee : MonoBehaviour
     public Transform attackPos;
     public LayerMask whatIsEnemies;
     public float attackRange;
-    public float attackDmg;
+    public int attackDmg;
 
     public GameObject AttackParticleSystem;
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class PlayerMelee : MonoBehaviour
             var enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
             for (var i = 0; i < enemiesToDamage.Length; i++)
             {
-                //enemiesToDamage[i].GetComponent<Enemy>().health -= attackDmg;
+                enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(attackDmg);
             }
 
             timeBtwAttack = startTimeBtwAttack;

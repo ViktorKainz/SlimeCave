@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public int health;
     public Vector2 roomPosition;
     public Vector2 roomSize;
+    public Animator animator;
     
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         health--;
+        animator.SetBool("hit", true);
         if (health <= 0)
         {
             Destroy(gameObject);

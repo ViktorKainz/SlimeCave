@@ -505,7 +505,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230231205}
   m_CullTransparentMesh: 1
---- !u!1001 &1433915277
+--- !u!1001 &1650740133
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -526,7 +526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2704642712089422914, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2704642712089422914, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -568,8 +568,25 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2131549805}
+    - target: {fileID: 5183072441818092789, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
+      propertyPath: attackPos
+      value: 
+      objectReference: {fileID: 2030981365}
+    - target: {fileID: 5183072441818092789, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
+      propertyPath: attackRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183072441818092789, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
+      propertyPath: AttackParticleSystem
+      value: 
+      objectReference: {fileID: 6997708923493635906, guid: 30266806e53397c13a0edb23e70ce8c0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
+--- !u!4 &2030981365 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2808744209799989464, guid: c1e4c23a72c143830b2174117ea6f54b, type: 3}
+  m_PrefabInstance: {fileID: 1650740133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2131549803
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9126179771667472749}
   - component: {fileID: 3501209417288053309}
   - component: {fileID: 2686141302086463145}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyFast
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -156,8 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  roomPosition: {x: 120, y: 90}
+  roomPosition: {x: 140, y: 100}
   roomSize: {x: 20, y: 10}
+  animator: {fileID: 9126179771667472748}
 --- !u!114 &2686141302086463145
 MonoBehaviour:
   m_ObjectHideFlags: 0
