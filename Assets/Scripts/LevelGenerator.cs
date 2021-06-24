@@ -158,7 +158,7 @@ public class LevelGenerator : MonoBehaviour
                     if (level[y, x].plan == rooms.startRoom)
                     {
                         GameObject.FindGameObjectWithTag("Player").transform.position =
-                            new Vector3(x * width, y * height, -1);
+                            new Vector3(x * width, y * height, -2);
                     }
                     else
                     {
@@ -171,7 +171,7 @@ public class LevelGenerator : MonoBehaviour
                             e.roomSize = new Vector2(width, height);
                             GameObject instance = Instantiate(enemy,
                                 new Vector3(x * width + Random.Range(-width / 2 + 1, width / 2 - 1),
-                                    y * height + Random.Range(-height / 2 + 1, height / 2 - 1), -1),
+                                    y * height + Random.Range(-height / 2 + 1, height / 2 - 1), -2),
                                 enemy.transform.rotation);
                             instance.transform.parent = level[y, x].room.transform;
                             level[y, x].enemies.Add(instance);

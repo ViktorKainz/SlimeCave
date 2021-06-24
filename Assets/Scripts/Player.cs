@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
         floorCounter = GameObject.FindGameObjectWithTag("Floor").GetComponent<Text>();
         healthCounter = GameObject.FindGameObjectWithTag("Health").GetComponent<Text>();
         generator = GameObject.FindGameObjectWithTag("Generator").GetComponent<LevelGenerator>();
-        generator.RemoveLevel();
     }
 
     // Update is called once per frame
