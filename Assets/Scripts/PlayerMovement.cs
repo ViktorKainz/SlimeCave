@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public Camera cam;
     private Vector2 movement;
     private Vector2 mousePos;
-    private bool rotating = true;
 
     // Start is called before the first frame update
     void Start()
