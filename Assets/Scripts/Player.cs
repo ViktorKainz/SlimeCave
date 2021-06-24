@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
         animator.SetBool("hit", true);
         if (health <= 0)
         {
+            generator.RemoveLevel();
             generator.GenerateLevel();
             health = maxHealth;
             floor = 1;
